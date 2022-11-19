@@ -31,7 +31,7 @@ require 'dbcon.php';
                         if(isset($_GET['id']))
                         {
                             $faculty_id = mysqli_real_escape_string($con, $_GET['id']);
-                            $query = "SELECT * FROM login WHERE uname='$faculty_id' ";
+                            $query = "SELECT * FROM login WHERE id='$faculty_id' ";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
@@ -41,44 +41,20 @@ require 'dbcon.php';
                                     <div class="mb-3">
                                         <label>Faculty ID</label>
                                         <p class="form-control">
-                                            <?=$faculty['uname'];?>
+                                            <?=$faculty['id'];?>
                                         </p>
                                     </div>
                                 
                                     <div class="mb-3">
+                                        <label>Faculty Name</label>
+                                        <p class="form-control">
+                                            <?=$faculty['uname'];?>
+                                        </p>
+                                    </div>
+                                    <div class="mb-3">
                                         <label>Faculty type</label>
                                         <p class="form-control">
                                             <?=$faculty['u_type'];?>
-                                        </p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label>SEM</label>
-                                        <p class="form-control">
-                                            <?=$faculty['sem'];?>
-                                        </p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label>Branch</label>
-                                        <p class="form-control">
-                                            <?=$faculty['branch'];?>
-                                        </p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label>Batch</label>
-                                        <p class="form-control">
-                                            <?=$faculty['batch'];?>
-                                        </p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label>Year</label>
-                                        <p class="form-control">
-                                            <?=$faculty['year'];?>
-                                        </p>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label>Email</label>
-                                        <p class="form-control">
-                                            <?=$faculty['email'];?>
                                         </p>
                                     </div>
 

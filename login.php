@@ -108,15 +108,15 @@ if(isset($_POST['lgn']))
             
             $_SESSION['login']=$row['uname'];
             echo "<script>alert('Login success   ".$row['u_type']."   ". $_SESSION['login']."');</script>";
-if($row['u_type']=="advisor"){
+if($row['u_type']=="Advisor"){
   
 echo "<script>window.location='advisor_dashboard.html';</script>";
 }
-else if($row['u_type']=="hod"){
+else if($row['u_type']=="HOD"){
   
 echo "<script>window.location='hod_dashboard.html';</script>";
 }
-else if($row['u_type']=="sch"){
+else if($row['u_type']=="SCH"){
   
 echo "<script>window.location='coordinator_dashboard.html';</script>";
 }
