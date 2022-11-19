@@ -31,9 +31,13 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                   
-                                    <th>Faculty Name</th>
+                                    <th>Faculty ID</th>
                                     <th>Faculty type</th>
+                                    <th>Sem</th>
+                                    <th>Branch</th>
+                                    <th>Batch</th>
+                                    <th>Sem</th>
+                                    <th>Email</th>
                         
                                 </tr>
                             </thead>
@@ -48,9 +52,14 @@
                                         {
                                             ?>
                                             <tr>
-                                               
+            
                                                 <td><?= $faculty['uname']; ?></td>
                                                 <td><?= $faculty['u_type']; ?></td>
+                                                <td><?= $faculty['sem']; ?></td>
+                                                <td><?= $faculty['branch']; ?></td>
+                                                <td><?= $faculty['batch']; ?></td>
+                                                <td><?= $faculty['year']; ?></td>
+                                                <td><?= $faculty['email']; ?></td>
                                                 <td>
                                                     <a href="student-view.php?id=<?= $faculty['uname']; ?>" class="btn btn-info btn-sm">View</a>
                                                     <a href="student-edit.php?id=<?= $faculty['uname']; ?>" class="btn btn-success btn-sm">Edit</a>

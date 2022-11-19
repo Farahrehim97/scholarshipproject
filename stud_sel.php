@@ -22,7 +22,46 @@ function csv_dn()
 {
 window.location="print_csv_sel_list.php";    
 }
+function edtfn()
+{
 
+
+
+}
+
+function viewclick(vonj) { //when click the view details button
+           tst_id = vonj.getAttribute("data-stid");
+            filldivplz(tst_id);
+            document.getElementById("idview").style.display = "block";
+
+        }
+function filldivplz(reff_no_tst) {
+            //used for fillng the test view div elements
+                 //  alert(reff_no_tst); 
+            $.ajax({
+                url: "stud_dn_ajax.php",
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                    idr: 3,
+                    reff_dta: reff_no_tst,
+                },
+                success: function(resobjri) {
+                  //  alert(resobjri[0]); 
+                    document.getElementById("name").innerHTML = resobjri[0];
+                    document.getElementById("stdid").innerHTML = resobjri[1];
+                    document.getElementById("emaildw").innerHTML = resobjri[2];
+                    document.getElementById("ph").innerHTML = resobjri[3];
+                    document.getElementById("fin").innerHTML = resobjri[4];
+                    document.getElementById("min").innerHTML = resobjri[5];
+                    document.getElementById("sin").innerHTML = resobjri[6]+ resobjri[7];
+                    document.getElementById("rank").innerHTML = resobjri[8];
+                    document.getElementById("mark").innerHTML = resobjri[9];
+
+
+                }
+            });
+        }
 
 function rldk()
 {
@@ -65,18 +104,56 @@ function crete_list() { //used for the creation of the list of bookings
             });
         }
 
-function fillData(kzm) { //used to fill data on the each booking div
+
+function sel(vonj){
+    tst_id = vonj.getAttribute("data-std");
+    idada= vonj.getAttribute("data-ammuid");
+            updt(tst_id,idada);
+            
+}
+function updt(ref,idt)
+{//alert(ref);
+    klms=document.getElementById(idt).value;
+    $.ajax({
+                url: 'stud_dn_ajax.php',
+                type: 'POST',
+                dataType: "JSON",
+                data: {
+                    idr: 2,
+                    srh:ref,
+                    selfn:klms,
+                
+                },
+                success: function(res1) {
+                    crete_list();
+               },
+            
+            });
+}
+
+        function fillData(kzm) { //used to fill data on the each booking div
 
 for (i = 0; i < kzm.length; i++) {
     nameId = "stid" + i;
     locaId = "fname" + i;
     tnamerh = "roll" + i;
-    //btnammu = "sel" + i;
+    btnammu = "sel" + i;
   //  dtr = "dt" + i;
       document.getElementById(nameId).innerHTML = kzm[i].studid;
     document.getElementById(locaId).innerHTML = kzm[i].fullname;
     document.getElementById(tnamerh ).innerHTML = kzm[i].rollno;
-   
+    if(kzm[i].selected=="")
+    {
+        document.getElementById(btnammu).style.backgroundColor ="#6F8BBA" ;
+        document.getElementById(btnammu).value ="Select" ; 
+
+    }
+    else
+    {
+        document.getElementById(btnammu).style.backgroundColor ="green" ; 
+        document.getElementById(btnammu).value ="Selected" ; 
+
+    }
 
 }
 

@@ -5,77 +5,35 @@ $uidlgn=$_SESSION['login'];
 $dwny=mysqli_fetch_assoc(mysqli_query($conn,"select * from login where uname='$uidlgn';"));
 $batch=$dwny['batch'];
 $branch=$dwny['branch'];
-$sem=$dwny['sem'];
-if($_POST['idr']==10){//to forwared list to HOD
-  $veri3="select * from registration_details where branch='$branch' and selected='selected' order by rollno; ";
-  mysqli_query($conn,"DELETE FROM to_scm WHERE studid in(select studid from registration_details where branch='$branch' )");
-  $resObjQuerykl=mysqli_query($conn,$veri3);
-  if ($dwam=mysqli_num_rows($resObjQuerykl)) {
-    while ($rowObjfk = mysqli_fetch_assoc($resObjQuerykl)) {
-      $val1=$rowObjfk['studid'];
-      $val2=$rowObjfk['branch'];
-       mysqli_query($conn,"insert into to_scm values('$val1','$val2');");
-    }
-    echo $dwam;
-  }
-  else
-  {
-    echo 0;
-  }
-  
-  
-  }
-
-if($_POST['idr']==9){//to forwared list to HOD
-$veri1="select * from registration_details where branch='$branch' and selected='selected' and batch='$batch' and semester=$sem order by rollno; ";
-mysqli_query($conn,"DELETE FROM to_hod WHERE studid in(select studid from registration_details where branch='$branch' and batch='$batch' and semester=$sem  )");
-$resObjQuerykl=mysqli_query($conn,$veri1);
-if ($dwam=mysqli_num_rows($resObjQuerykl)) {
-  while ($rowObjfk = mysqli_fetch_assoc($resObjQuerykl)) {
-    $val1=$rowObjfk['studid'];
-    $val2=$rowObjfk['branch'];
-     mysqli_query($conn,"insert into to_hod values('$val1','$val2');");
-  }
-  echo $dwam;
-}
-else
-{
-  echo 0;
-}
-
-
-}
-
 if($_POST['idr']==8){
   $stdid=$_POST['srh'];
   if($_POST['selfn']=="Selected"){
       mysqli_query($conn,"update registration_details set selected='rejected' where studid='$stdid';");
-      echo 1;
-    }
+  }
   else
   {
       mysqli_query($conn,"update registration_details set selected='selected' where studid='$stdid';");
-      echo 0;
-  }
 
+  }
+echo 1;
 
 }
 
 
-if($_POST['idr']==7){//used to display the list of students for HOD
+if($_POST['idr']==7){//used to display the list of students
     
   $srch=$_POST['srh'];
   
   //$user_idr=$_POST['uidrh'];
       if($srch==""){
-        $sqQuery = "select * from registration_details where studid in (select studid from to_hod where branch='$branch')order by rollno;";
+        $sqQuery = "select * from registration_details where branch='$branch' and (selected='selected' or selected='rejected' )order by rollno;";
        // echo "1";
      }
        else{
         if($srch!="")
         {
           $m=$srch."%";
-        $sqQuery = "select * from registration_details where ( studid like '$m' or fullname like '$m') and  studid in (select studid from to_hod where branch='$branch')  order by rollno;";
+        $sqQuery = "select * from registration_details where ( studid like '$m' or fullname like '$m') and  branch='$branch' and (selected='selected' or selected='rejected' ) order by rollno;";
         //echo 2;
         }
         
@@ -96,14 +54,14 @@ if($_POST['idr']==7){//used to display the list of students for HOD
       }
   }
 
-if($_POST['idr']==6){//logout
+if($_POST['idr']==6){//used to display the list of students
     
 $_SESSION['login']="";
   echo 1;
   
   }
 
-if($_POST['idr']==5){//session check
+if($_POST['idr']==5){//used to display the list of students
     
 if($_SESSION['login']=="")
 {
@@ -118,7 +76,7 @@ else
 if($_POST['idr']==4){//used to display the list of students
     
   
-        $sqQuery = "select * from registration_details where branch='$branch' and batch='$batch' and semester='$sem'and selected='selected' order by rollno;";
+        $sqQuery = "select * from registration_details where branch='$branch' and batch='$batch'and selected='selected' order by rollno;";
        // echo "1";
     
          $_SESSION['fetch_qry']=$sqQuery;
@@ -162,14 +120,13 @@ if($_POST['idr']==4){//used to display the list of students
             $stdid=$_POST['srh'];
             if($_POST['selfn']=="Select"){
                 mysqli_query($conn,"update registration_details set selected='selected' where studid='$stdid';");
-            echo 0;
-              }
+            }
             else
             {
                 mysqli_query($conn,"update registration_details set selected='' where studid='$stdid';");
-echo 1;
-            }
 
+            }
+echo 1;
 
         }
 
@@ -179,14 +136,14 @@ $srch=$_POST['srh'];
 
 //$user_idr=$_POST['uidrh'];
     if($srch==""){
-      $sqQuery = "select * from registration_details where branch='$branch' and batch='$batch' and semester=$sem order by rollno;";
+      $sqQuery = "select * from registration_details where branch='$branch' and batch='$batch' order by rollno;";
      // echo "1";
    }
      else{
       if($srch!="")
       {
         $m=$srch."%";
-      $sqQuery = "select * from registration_details where ( studid like '$m' or fullname like '$m') and  branch='$branch' and batch='$batch' and semester=$sem order by rollno;";
+      $sqQuery = "select * from registration_details where ( studid like '$m' or fullname like '$m') and  branch='$branch' and batch='$batch' order by rollno;";
       //echo 2;
       }
       

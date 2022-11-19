@@ -35,7 +35,7 @@ require 'dbcon.php';
                         if(isset($_GET['id']))
                         {
                             $faculty_id = mysqli_real_escape_string($con, $_GET['id']);
-                            $query = "SELECT * FROM login WHERE id='$faculty_id' ";
+                            $query = "SELECT * FROM login WHERE uname='$faculty_id' ";
                             $query_run = mysqli_query($con, $query);
 
                             if(mysqli_num_rows($query_run) > 0)
@@ -44,15 +44,35 @@ require 'dbcon.php';
                                 //echo $faculty;
                                 ?>
                                 <form action="code.php" method="POST">
-                                    <input type="hidden" name="faculty_id" value="<?= $faculty['id']; ?>">
+                                    <input type="hidden" name="faculty_id" value="<?= $faculty['uname']; ?>">
 
                                     <div class="mb-3">
                                         <label>Faculty Name</label>
-                                        <input type="text" name="name" value="<?=$faculty['uname'];?>" class="form-control">
+                                        <input type="text" name="uname" value="<?=$faculty['uname'];?>" class="form-control">
                                     </div>
                                     <div class="mb-3">
                                         <label>Faculty type</label>
                                         <input type="text" name="faculty_type" value="<?=$faculty['u_type'];?>" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Branch</label>
+                                        <input type="text" name="branch" value="<?=$faculty['branch'];?>" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Batch</label>
+                                        <input type="text" name="batch" value="<?=$faculty['batch'];?>" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Sem</label>
+                                        <input type="number" name="sem" value="<?=$faculty['sem'];?>" class="form-control">
+                                    </div>
+                                    <div class="mb-3">
+                                        <label>Year</label>
+                                        <input type="number" name="year" value="<?=$faculty['year'];?>" class="form-control">
+                                    </div>
+                                     <div class="mb-3">
+                                        <label>Email</label>
+                                        <input type="text" name="email" value="<?=$faculty['email'];?>" class="form-control">
                                     </div>
                                     <div class="mb-3">
                                         <button type="submit" name="update_faculty" class="btn btn-primary">

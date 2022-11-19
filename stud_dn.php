@@ -53,7 +53,7 @@ sdgsfg
             <input type="button" value="Select" onclick="rjt()" style="position:absolute;top:92%;left:55%;height:40px;width:115px;border-radius:10px;cursor:pointer;background-color:#6F8BBA;">
 <input type="button" value="Download details" style="position:absolute;top:92%;left:25%;height:40px;width:145px;border-radius:10px;cursor:pointer;background-color:#6F8BBA;" onclick="csv_dwn()">
         </div>
-        <input type="Button" value="Download Application List" onclick="csv_dwn()"><input type="Button" value="Download Selected Lst" onclick="csv_dn()"><input type="button" value="Submit to HOD" onclick="to_hod()"></div>
+        <input type="Button" value="Download Application List" onclick="csv_dwn()"><input type="Button" value="Download Selected Lst" onclick="csv_dn()"></div>
 </body>
 <script>
 crete_list();
@@ -71,29 +71,7 @@ function edtfn()
 
 
 }
-function to_hod(){//used to transfer selected list to hod
-    //alert('hello');
-    $.ajax({
-                url: "stud_dn_ajax.php",
-                method: "POST",
-                dataType: "JSON",
-                data: {
-                    idr: 9,
-                },
-                success: function(resobjri) {
-                  if(resobjri==0)
-                  {
-                    alert("No student selected"); 
-                  }
-                  else
-                  {
-                    alert("Successfully forwarded "+resobjri+" selected students to HOD"); 
-                 
-                }
-                }
-            });
 
-}
 function viewclick(vonj) { //when click the view details button
            tst_id = vonj.getAttribute("data-stid");
             filldivplz(tst_id);
@@ -176,7 +154,6 @@ function sel(vonj){
     tst_id = vonj.getAttribute("data-std");
     idada= vonj.getAttribute("data-ammuid");
             updt(tst_id,idada);
-
             
 }
 function updt(ref,idt)
@@ -193,21 +170,7 @@ function updt(ref,idt)
                 
                 },
                 success: function(res1) {
-                   
-                    if(res1==1)
-    {
-        document.getElementById(idt).style.backgroundColor ="#6F8BBA" ;
-        document.getElementById(idt).value ="Select" ; 
-
-    }
-    if(res1==0)
-    {
-        document.getElementById(idt).style.backgroundColor ="green" ; 
-        document.getElementById(idt).value ="Selected" ; 
-
-    }
-    crete_list();
-  
+                    crete_list();
                },
             
             });
