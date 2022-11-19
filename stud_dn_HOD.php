@@ -52,7 +52,7 @@ sdgsfg
             <input type="button" value="EDIT" onclick="edtfn()" style="position:absolute;top:92%;left:40%;height:40px;width:115px;border-radius:10px;cursor:pointer;">
             <input type="button" value="Select" onclick="rjt()" style="position:absolute;top:92%;left:55%;height:40px;width:115px;border-radius:10px;cursor:pointer;background-color:#6F8BBA;">
 <input type="button" value="Download details" style="position:absolute;top:92%;left:25%;height:40px;width:145px;border-radius:10px;cursor:pointer;background-color:#6F8BBA;" onclick="csv_dwn()">
-        </div><input type="Button" value="Download Selected List" onclick="csv_dn()"></div>
+        </div><input type="Button" value="Download Selected List" onclick="csv_dn()"><input type="button" value="Submit to SCM" onclick="to_svm()"></div>
 </body>
 <script>
 crete_list();
@@ -66,6 +66,36 @@ function edtfn()
 
 
 }
+function csv_dwn()
+{
+window.location="print_csv.php";    
+}
+
+function to_svm(){//used to transfer selected list to sch
+    //alert('hello');
+    $.ajax({
+                url: "stud_dn_ajax.php",
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                    idr: 10,
+                },
+                success: function(resobjri) {
+                  if(resobjri==0)
+                  {
+                    alert("No student selected"); 
+                  }
+                  else
+                  {
+                    alert("Successfully forwarded "+resobjri+" selected students to SCM"); 
+                 
+                }
+                }
+            });
+
+}
+
+
 
 function viewclick(vonj) { //when click the view details button
            tst_id = vonj.getAttribute("data-stid");
@@ -107,8 +137,8 @@ function rldk()
     crete_list();
 
 }
-function crete_list() { //used for the creation of the list of bookings
-           val1 = document.getElementById("srch").value; //date
+function crete_list() { //used for the 
+           val1 = document.getElementById("srch").value; 
            $.ajax({
                 url: 'stud_dn_ajax.php',
                 type: 'POST',
@@ -165,7 +195,25 @@ function updt(ref,idt)
                 
                 },
                 success: function(res1) {
+                    
+                    if(res1==0)
+    {
+        document.getElementById(idt).style.backgroundColor ="green" ; 
+        document.getElementById(idt).value ="Selected" ; 
+
+    }
+    if(res1==1)
+    {
+        document.getElementById(idt).style.backgroundColor ="red" ; 
+        document.getElementById(idt).value ="rejected" ; 
+
+    }
+                    
+                    
                     crete_list();
+
+
+
                },
             
             });

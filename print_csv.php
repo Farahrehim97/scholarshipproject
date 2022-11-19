@@ -1,8 +1,8 @@
 <?php
 session_start();
 include("dbconnect.php");
-//$sqQuery =$_SESSION['fetch_qry'];
-$sqQuery ="select * from registration_details;";
+$sqQuery =$_SESSION['fetch_qry'];
+//$sqQuery ="select * from registration_details;";
 $resObjQuery = mysqli_query($conn, $sqQuery);
 $resObjQuery1 = mysqli_query($conn,"select * from registration_details;");
 $f = fopen('php://memory', 'w'); 
