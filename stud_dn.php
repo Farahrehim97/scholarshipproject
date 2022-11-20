@@ -8,7 +8,7 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> <!-- ajax -->
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"><!-- fara  -->
 </head>
 <style>
 .viewdt {
@@ -149,6 +149,11 @@ function crete_list() { //used for the creation of the list of bookings
                     $('#bking_listz').empty();
                     notfnd = `<h3 align='center' style='color:#EC8282;'>oobs,no details found</h3> `;
                   if (res1[0] != "NULL") {
+                    txv = `
+                            <div style='width:100%;height:25px;margin-top:5px;border-radius:15px;'class="card-body"><b style='color:black;margin-left:115px;font-size:20px;'><u>STUDID</U></b>   <b style="color:red;margin-left:115px;position:absolute;left:15%;"><u>FULL NAME<u></b> <b style="margin-left:115px;margin-right:115px;position:absolute;left:50%;"><u>ROLL NO:</u> </b></div><br>
+                          `;
+
+                            $('#bking_listz').append(txv);
                        
                         for (i = 0; i < res1.length; i++) {
                             idName = "stid" + i;
@@ -156,7 +161,7 @@ function crete_list() { //used for the creation of the list of bookings
                             tnamek = "roll" + i;
                             btnid = "sel" + i;
                             txv = `
-                            <div id='` + i+ `' style='width:100%;height:65px;margin-top:5px;background-color:#DAC7C7;border-radius:15px;' ><b id='` + idName + `' style='color:black;margin-left:115px;font-size:20px;'>STUDID</b>   <b style="color:red;margin-left:115px;"id='` + idLoca + `'>FULL NAME</b> <b style="margin-left:115px;margin-right:115px;">ROLL NO: <b id='` + tnamek + `'></b></b><input type="button" data-stid='` + res1[i].studid + `'  onclick="viewclick(this)" style="cursor:pointer;margin-right:35px;" value="View & Edit Details"><input  data-std='` + res1[i].studid + `'  data-ammuid='` + btnid+ `' type="button" id='` + btnid + `'  onclick="sel(this)" style="cursor:pointer;background-color:#6F8BBA;height:35px;width:96px;border-radius:5px;margin-top:15px;" value="Select"></div><br>
+                            <div id='` + i+ `' style='width:100%;height:65px;margin-top:5px;background-color:#E1E5EA;border-radius:15px;'class="card-body"><b id='` + idName + `' style='color:black;margin-left:115px;font-size:20px;'>STUDID</b>   <b style="color:red;margin-left:115px;position:absolute;left:15%;"id='` + idLoca + `'>FULL NAME</b> <b style="margin-left:115px;margin-right:115px;position:absolute;left:50%;">ROLL NO: <b id='` + tnamek + `'></b></b><input type="button" data-stid='` + res1[i].studid + `'  onclick="viewclick(this)" style="cursor:pointer;margin-right:35px;position:absolute;right:15%;" value="View & Edit Details"><input  data-std='` + res1[i].studid + `'  data-ammuid='` + btnid+ `' type="button" id='` + btnid + `'  onclick="sel(this)" style="cursor:pointer;background-color:#6F8BBA;height:35px;width:96px;border-radius:5px;margin-top:1px;position:absolute;right:25px;" value="Select"></div><br>
                           `;
 
                             $('#bking_listz').append(txv);
