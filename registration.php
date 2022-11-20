@@ -207,7 +207,10 @@
                         <div class="input-field"></div>
                         <div class="input-field"></div>
                        
-                        <div style="outline: none;font-size: 10px;font-weight: 400; color: #333;border-radius: 5px; width:50px;"><h1 id="t1">1</h1></div>
+                        <div style="outline: none;font-size: 10px;font-weight: 400; color: #333;border-radius: 5px; width:50px;">
+                            
+                            <h1 id="t1">1</h1>
+                        </div>
                          <div class="input-field">
                             <label>Back Papers</label>
                             <input type="number" name="backpaper" onclick="valdw()" id="backpaper"  onkeyup="gen_sec()" onblur="valdfn8()" placeholder="Enter no of back papers" required  >
@@ -215,13 +218,13 @@
 
                         <div class="input-field">
                             <label>GPA</label>
-                            <input type="number" onclick="valdw()" name="gpa" id="gpa" onkeyup="gen_sec()"  placeholder="Enter gpa"required >
+                            <input type="number" onclick="valdw()" name="gpa" id="gpa" onkeyup="gen_sec()" onblur="valdfn28()"placeholder="Enter gpa"required >
                           
                         </div>
 
                            <div class>
-                              <input type="button" name="addm" id="hk" value=" + " onclick="dndn(1)">
-                        <input type="button" name="Back" id='lk' value=" - " onclick="dndn(0)">
+                              <input type="button" name="addm" id="hk" value=" next " onclick="dndn(1)">
+                        <input type="button" name="Back" id='lk' value=" prev " onclick="dndn(0)">
                     </div>
 
                     </div>
@@ -557,7 +560,7 @@ window.history.forward();
     }
 
 ////back page prevent
-var s1=0,s2=0,s3=0,s4=0,s5=0,s6=0,s7=0,s8=0,s9=0,s10=0,s11=0,s12=0,s13=0,s14=0,s15=0,s16=0,s17=0,s18=0,s19=0,s20=0,s21=0,s22=0,s23=0,s24=0,s25=0,s26=0,s27=0;
+var s1=0,s2=0,s3=0,s4=0,s5=0,s6=0,s7=0,s8=0,s9=0,s10=0,s11=0,s12=0,s13=0,s14=0,s15=0,s16=0,s17=0,s18=0,s19=0,s20=0,s21=0,s22=0,s23=0,s24=0,s25=0,s26=0,s27=0,s28=0;
 
 function hostelcheck()
 {
@@ -584,7 +587,7 @@ function hostelcheck()
  function valdfn1()
 
 {
-    var reg=/^[\\p{L} .'-]+$/;
+    var reg=/^[a-zA-Z][a-zA-Z\s]+$/;
     var fname=document.getElementById("fullname").value;
     if(reg.test(fname))
     { 
@@ -1099,10 +1102,29 @@ function valdfn27()
     }
 
 }
+function valdfn28()
+{
+    var gpa=document.getElementById("gpa").value;
+     if(gpa>=0 && gpa<=10)
+     {
+     s28=1; 
+     document.getElementById("gpa").style.border = "2px solid green";
+
+     test();
+     }
+    
+    else
+    {
+     s28=0;
+    document.getElementById("gpa").style.border = "2px solid #F91721";
+   test();
+    }
+    
+}
 
 function test()
 {
-    if(s1==1&&s2==1&&s3==1&&s4==1&&s5==1&&s6==1&&s7==1&&s8==1&&s9==1&&s10==1&&s11==1&&s12==1&&s13==1&&s14==1&&s15==1&&s16==1&&s17==1&&s18==1&&s19==1&&s20==1&&s21==1&&s22==1&&s23==1&&s24==1&&s25==1&&s26==1&&s27==1)
+    if(s1==1&&s2==1&&s3==1&&s4==1&&s5==1&&s6==1&&s7==1&&s8==1&&s9==1&&s10==1&&s11==1&&s12==1&&s13==1&&s14==1&&s15==1&&s16==1&&s17==1&&s18==1&&s19==1&&s20==1&&s21==1&&s22==1&&s23==1&&s24==1&&s25==1&&s26==1&&s27==1&&s28==1)
     {   document.getElementById("register").style.backgroundColor ="#265df2";
         document.getElementById("register").disabled =false;
                 
@@ -1175,6 +1197,7 @@ i = 1;
     function gen_sec() //to generate a php session that contain array elements
     {
         valdfn8();
+        valdfn28();
         gh[i] = document.getElementById("gpa").value; //used to store enterd GPA in array
         gd[i] = document.getElementById("backpaper").value;
         $.ajax({
