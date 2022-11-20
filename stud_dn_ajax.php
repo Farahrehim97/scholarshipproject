@@ -6,7 +6,63 @@ $dwny=mysqli_fetch_assoc(mysqli_query($conn,"select * from login where uname='$u
 $batch=$dwny['batch'];
 $branch=$dwny['branch'];
 $sem=$dwny['sem'];
-if($_POST['idr']==10){//to forwared list to HOD
+
+if($_POST['idr']==12){//to forwared list to Admin
+  $veri3="select * from registration_details where branch='$branch' and selected='selected' order by rollno; ";
+  mysqli_query($conn,"DELETE FROM to_admin WHERE studid in(select studid from registration_details where branch='$branch' )");
+  $resObjQuerykl=mysqli_query($conn,$veri3);
+  if ($dwam=mysqli_num_rows($resObjQuerykl)) {
+    while ($rowObjfk = mysqli_fetch_assoc($resObjQuerykl)) {
+      $val1=$rowObjfk['studid'];
+      $val2=$rowObjfk['branch'];
+       mysqli_query($conn,"insert into to_admin values('$val1','$val2');");
+    }
+    echo $dwam;
+  }
+  else
+  {
+    echo 0;
+  }
+  
+  
+  }
+
+if($_POST['idr']==11){//used to display the list of students for SCH
+    
+  $srch=$_POST['srh'];
+  
+  //$user_idr=$_POST['uidrh'];
+      if($srch==""){
+        $sqQuery = "select * from registration_details where studid in (select studid from to_scm where branch='$branch')order by rollno;";
+       // echo "1";
+     }
+       else{
+        if($srch!="")
+        {
+          $m=$srch."%";
+        $sqQuery = "select * from registration_details where ( studid like '$m' or fullname like '$m') and  studid in (select studid from to_scm where branch='$branch')  order by rollno;";
+        //echo 2;
+        }
+        
+      } 
+  
+         $resObjQuery = mysqli_query($conn, $sqQuery);
+         $_SESSION['fetch_qry']="select * from registration_details where branch='$branch' and selected='selected' order by rollno;";;
+      $i = 0;
+      if (mysqli_num_rows($resObjQuery)) {
+          while ($rowObj = mysqli_fetch_assoc($resObjQuery)) {
+              $retArray[$i] = $rowObj;
+              $i++;
+          }
+          echo json_encode($retArray);
+      } else {
+          $retArray[0] = "NULL";
+          echo json_encode($retArray);
+      }
+  }
+
+
+if($_POST['idr']==10){//to forwared list to scm
   $veri3="select * from registration_details where branch='$branch' and selected='selected' order by rollno; ";
   mysqli_query($conn,"DELETE FROM to_scm WHERE studid in(select studid from registration_details where branch='$branch' )");
   $resObjQuerykl=mysqli_query($conn,$veri3);

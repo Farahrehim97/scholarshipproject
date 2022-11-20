@@ -176,9 +176,12 @@ function crete_list() { //used for the
 
 
 function sel(vonj){
+    if(confirm('Are You Sure Want to Continue?'))
+    {
     tst_id = vonj.getAttribute("data-std");
     idada= vonj.getAttribute("data-ammuid");
             updt(tst_id,idada);
+    }
             
 }
 function updt(ref,idt)

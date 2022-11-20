@@ -206,8 +206,8 @@ function updt(ref,idt)
         document.getElementById(idt).value ="Selected" ; 
 
     }
+
     crete_list();
-  
                },
             
             });
