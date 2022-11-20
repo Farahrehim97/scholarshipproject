@@ -59,7 +59,7 @@ if(mysqli_num_rows($resobjdw))
 crete_list();
 function csv_dwn()
 {
-window.location="print_csv.php";    
+window.location="print_csv_admin.php";    
 }
 
 function viewclick(vonj) { //when click the view details button

@@ -30,6 +30,7 @@ $srch1=$_POST['srh1'];
 //$user_idr=$_POST['uidrh'];
     if($srch=="" && $srch1==""){
       $sqQuery = "select * from registration_details where studid in (select studid from to_admin)  order by branch;";
+      $sqQuery12 = "select fullname,branch,hosteller,accno,bankbranch,ifsc,category from registration_details where studid in (select studid from to_admin)  order by branch;";
      // echo "1";
    }
      else{
@@ -37,24 +38,27 @@ $srch1=$_POST['srh1'];
       {
         $m=$srch."%";
       $sqQuery = "select * from registration_details where ( studid like '$m' or fullname like '$m') and studid in (select studid from to_admin)  order by branch;";
+      $sqQuery12 = "select fullname,branch,hosteller,accno,bankbranch,ifsc,category from registration_details where ( studid like '$m' or fullname like '$m') and studid in (select studid from to_admin)  order by branch;";
       //echo 2;
       }
       if($srch=="" && $srch1!="")
       {
       $sqQuery = "select * from registration_details where studid in (select studid from to_admin where branch='$srch1')  order by branch;";
+      $sqQuery12 = "select fullname,branch,hosteller,accno,bankbranch,ifsc,category from registration_details where studid in (select studid from to_admin where branch='$srch1')  order by branch;";
       //echo 2;
       }
       if($srch!="" && $srch1!="")
       {
         $m=$srch."%";
       $sqQuery = "select * from registration_details where ( studid like '$m' or fullname like '$m') and studid in (select studid from to_admin where branch='$srch1')  order by branch;";
+      $sqQuery12 = "select fullname,branch,hosteller,accno,bankbranch,ifsc,category from registration_details where ( studid like '$m' or fullname like '$m') and studid in (select studid from to_admin where branch='$srch1')  order by branch;";
       //echo 2;
       }
       
     } 
 
        $resObjQuery = mysqli_query($conn, $sqQuery);
-       $_SESSION['fetch_qry']=$sqQuery;
+       $_SESSION['fetch_qry']=$sqQuery12;
     $i = 0;
     if (mysqli_num_rows($resObjQuery)) {
         while ($rowObj = mysqli_fetch_assoc($resObjQuery)) {
