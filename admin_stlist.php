@@ -35,7 +35,7 @@ session_start();
 <body><div style="margin-top:10%;">
 <label for="srch">Search Student</label><input type="text" placeholder="Enter Name or Ref no:" id="srch">
 <select id="sel_dep">
-<option value="">ALL</option>
+<option value="">SELECT DEPARTMENT</option>
 <?php
 include("dbconnect.php");
 $sqq="select distinct branch from to_admin";
